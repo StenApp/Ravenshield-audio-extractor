@@ -182,7 +182,22 @@ def parse_sb0(path):
     filesize = len(data)
     version, s2_num, s2_off, sX_off, sX_size, audio_base, S2 = \
         _parse_header(data)
-    sr_override = _VERSION_SR_OVERRIDE.get(version)
+    #sr_override = _VERSION_SR_OVERRIDE.get(version)
+    
+    # Voices-Erkennung: Ordner oder Dateiname
+    sb0_name = os.path.basename(path).lower()
+    sb0_dir  = os.path.basename(os.path.dirname(path)).lower()
+
+    is_voice = (
+        sb0_dir in ('ger', 'int') or
+        sb0_name.startswith('voice') or
+        sb0_name.startswith('voices')
+    )
+
+    if is_voice:
+        sr_override = 16000
+    else:
+        sr_override = _VERSION_SR_OVERRIDE.get(version)
 
     # Sanity: audio_base darf nicht groesser als Datei sein
     if audio_base > filesize:
