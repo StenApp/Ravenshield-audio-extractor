@@ -1,5 +1,5 @@
 You can extract all audio files of Raven Shield.
-is dependend on vgmstream-cli.exe für SS0 files.
+It is dependend on vgmstream-cli.exe for SS0 files.
 
 Open sound folder of RVS or any expansion and vgmstream-cli.exe next to py script.
 
